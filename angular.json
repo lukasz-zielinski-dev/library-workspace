@@ -42,6 +42,126 @@
           }
         }
       }
+    },
+    "my-library-playground": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "sass"
+        }
+      },
+      "root": "projects/my-library-playground",
+      "sourceRoot": "projects/my-library-playground/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/my-library-playground",
+            "index": "projects/my-library-playground/src/index.html",
+            "main": "projects/my-library-playground/src/main.ts",
+            "polyfills": "projects/my-library-playground/src/polyfills.ts",
+            "tsConfig": "projects/my-library-playground/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/my-library-playground/src/favicon.ico",
+              "projects/my-library-playground/src/assets"
+            ],
+            "styles": [
+              "projects/my-library-playground/src/styles.sass"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/my-library-playground/src/environments/environment.ts",
+                  "with": "projects/my-library-playground/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "my-library-playground:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "my-library-playground:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "my-library-playground:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/my-library-playground/src/test.ts",
+            "polyfills": "projects/my-library-playground/src/polyfills.ts",
+            "tsConfig": "projects/my-library-playground/tsconfig.spec.json",
+            "karmaConfig": "projects/my-library-playground/karma.conf.js",
+            "assets": [
+              "projects/my-library-playground/src/favicon.ico",
+              "projects/my-library-playground/src/assets"
+            ],
+            "styles": [
+              "projects/my-library-playground/src/styles.sass"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/my-library-playground/tsconfig.app.json",
+              "projects/my-library-playground/tsconfig.spec.json",
+              "projects/my-library-playground/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/my-library-playground/e2e/protractor.conf.js",
+            "devServerTarget": "my-library-playground:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "my-library-playground:serve:production"
+            }
+          }
+        }
+      }
     }
   },
   "defaultProject": "my-library"
