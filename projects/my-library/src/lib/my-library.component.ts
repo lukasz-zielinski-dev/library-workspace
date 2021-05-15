@@ -9,7 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
   `,
   styles: [
     `
-      .welcome-card {
+      .container {
         display: flex;
         justify-content: center;
       }
